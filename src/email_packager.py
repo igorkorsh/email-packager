@@ -117,8 +117,8 @@ class EmailPackager:
             for img in content.find_all("img"):
                 img["src"] = re.sub(r"/static", "images", img["src"])
 
-            formatter = HTMLFormatter(entity_substitution=replace_html_entities, indent=2)
-            html = content.prettify(formatter=formatter)
+            formatter = HTMLFormatter(entity_substitution=replace_html_entities)
+            html = content.decode(formatter=formatter)
             path.write_text(html, encoding="utf-8")
         except Exception as e:
             self.logger.error(f"[write_html] Unknown error: {path}: {e}")
